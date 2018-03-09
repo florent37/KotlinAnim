@@ -22,8 +22,14 @@ fun anim(view: View,
         viewAnimation.x?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.X, 1f * view.x, 1f * it))
         }
+        viewAnimation.centerX?.let {
+            animations.add(ObjectAnimator.ofFloat(view, View.X, 1f * view.x, 1f * it - view.width / 2f))
+        }
         viewAnimation.y?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.Y, 1f * view.y, 1f * it))
+        }
+        viewAnimation.centerY?.let {
+            animations.add(ObjectAnimator.ofFloat(view, View.Y, 1f * view.y, 1f * it - view.height / 2f))
         }
         viewAnimation.alpha?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.ALPHA, 1f * view.alpha, 1f * it))
@@ -96,6 +102,8 @@ class ViewAnimation {
     var alpha: Float? = null
     var scaleX: Float? = null
     var scaleY: Float? = null
+    var centerY: Float? = null
+    var centerX: Float? = null
     var rotation: Float? = null
     var rotationX: Float? = null
     var rotationY: Float? = null
@@ -143,4 +151,12 @@ class ViewAnimation {
         }
         return viewAnimation
     }
+}
+
+fun View.centerX(): Float {
+    return this.x + this.width / 2f;
+}
+
+fun View.centerY(): Float {
+    return this.y + this.height / 2f;
 }

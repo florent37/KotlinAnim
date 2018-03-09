@@ -18,5 +18,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+    compile "com.github.florent37:shapeofview:+"
+
     compile project(':kotlinanim')
 }
