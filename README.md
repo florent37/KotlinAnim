@@ -18,3 +18,5 @@ anim(avatar, startDelay = 1000L) {
     centerY = avatar.centerY()
 }
 ```
+
+[![screen](https://raw.githubusercontent.com/florent37/KotlinAnim/master/medias/sample.gif)](https://www.github.com/florent37/KotlinAnim)
