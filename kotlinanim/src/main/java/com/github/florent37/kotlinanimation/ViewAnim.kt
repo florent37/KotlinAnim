@@ -51,6 +51,12 @@ fun anim(view: View,
             animations.add(ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 1f * view.translationY, 1f * it))
         }
 
+        viewAnimation.properties.forEach {
+            val propertyName = it.first
+            val values = it.second
+            animations.add(ObjectAnimator.ofFloat(view, propertyName, values))
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             viewAnimation.translationZ?.let {
                 animations.add(ObjectAnimator.ofFloat(view, View.TRANSLATION_Z, 1f * view.translationZ, 1f * it))
@@ -96,6 +102,12 @@ class ViewAnimation {
     var translationX: Float? = null
     var translationY: Float? = null
     var translationZ: Float? = null
+
+    val properties = mutableListOf<Pair<String, Float>>()
+
+    fun property(name: String, value: Float){
+        properties.add(name to value)
+    }
 
     var then = mutableListOf<((ViewAnimation) -> ViewAnimation)>()
     var and = mutableListOf<((ViewAnimation) -> ViewAnimation)>()
