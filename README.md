@@ -12,7 +12,6 @@ anim(view, startDelay = 1000, duration = 1000) {
     rotation = 90f
 }.andAnim(button, duration = 1000) {
     alpha = 0.5f
-
     y = button.left
 }
 ```
