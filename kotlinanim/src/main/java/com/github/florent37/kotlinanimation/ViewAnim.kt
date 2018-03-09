@@ -19,14 +19,20 @@ fun anim(view: View,
         block.invoke(viewAnimation)
 
         val animations = mutableListOf<ValueAnimator>()
-        viewAnimation.x?.let {
+        viewAnimation.left?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.X, 1f * view.x, 1f * it))
+        }
+        viewAnimation.right?.let {
+            animations.add(ObjectAnimator.ofFloat(view, View.X, 1f * view.x, 1f * - view.width))
         }
         viewAnimation.centerX?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.X, 1f * view.x, 1f * it - view.width / 2f))
         }
-        viewAnimation.y?.let {
+        viewAnimation.top?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.Y, 1f * view.y, 1f * it))
+        }
+        viewAnimation.bottom?.let {
+            animations.add(ObjectAnimator.ofFloat(view, View.Y, 1f * view.y, 1f * it - view.height))
         }
         viewAnimation.centerY?.let {
             animations.add(ObjectAnimator.ofFloat(view, View.Y, 1f * view.y, 1f * it - view.height / 2f))
@@ -97,9 +103,17 @@ fun anim(view: View,
 
 class ViewAnimation {
 
-    var x: Float? = null
-    var y: Float? = null
+    var left: Float? = null
+    var right: Float? = null
+    var top: Float? = null
+    var bottom: Float? = null
     var alpha: Float? = null
+    var scale: Float? = null
+        set(value) {
+            scaleX = value
+            scaleY = value
+        }
+
     var scaleX: Float? = null
     var scaleY: Float? = null
     var centerY: Float? = null
@@ -113,7 +127,7 @@ class ViewAnimation {
 
     val properties = mutableListOf<Pair<String, Float>>()
 
-    fun property(name: String, value: Float){
+    fun property(name: String, value: Float) {
         properties.add(name to value)
     }
 
