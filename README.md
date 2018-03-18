@@ -1,22 +1,22 @@
 # KotlinAnim
 
-```kotlin
-val username = findViewById<View>(R.id.username)
-val avatar = findViewById<View>(R.id.avatar)
-val follow = findViewById<View>(R.id.follow)
+animation(avatar, startDelay = 1000L) { top = 0f }.join()
 
-anim(avatar, startDelay = 1000L) {
-    x = 16f
-    y = 0f
-    scaleX = 0.5f
-    scaleY = 0.5f
-}.thenAnim(username) {
-    x = avatar.x + avatar.width
-    centerY = avatar.centerY()
-}.andAnim(follow) {
-    x = avatar.x + avatar.width + username.width + 16
-    centerY = avatar.centerY()
-}
-```
+        floatAnimation(avatar, 1f, 0.5f){ view, value ->
+            view.alpha = value
+        }.join()
 
-[![screen](https://raw.githubusercontent.com/florent37/KotlinAnim/master/medias/sample.gif)](https://www.github.com/florent37/KotlinAnim)
+        val animations = mutableListOf<Job>(
+                animation(follow) {
+                    top = avatar.y + avatar.height + 16f
+                },
+                animation(kotlin) {
+                    left = avatar.x - kotlin.width - 16f
+                    centerY = avatar.centerY()
+                },
+                animation(coroutine) {
+                    left = avatar.x + avatar.width + 16f
+                    centerY = avatar.centerY()
+                }
+        )
+        animations.forEach { it.join() } // wait for all animations to complete

@@ -13,12 +13,20 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+
 dependencies {
     implementation 'com.android.support:appcompat-v7:'+project.supportVersion
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
 
-    compile "com.github.florent37:shapeofview:+"
+    implementation "com.github.florent37:shapeofview:+"
 
-    compile project(':kotlinanim')
+    implementation project(':kotlinanim')
 }
